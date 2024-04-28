@@ -14,8 +14,8 @@ const upload = multer({ storage: storage });
 
 const Routes = (client, router) => {
   router.get("/", async (req, res) => {
-    res.send("Sended Hello World!");
-    await client.sendMessage("me", { message: "Hello World!" });
+    res.send("Server Working Correctly!");
+    await client.sendMessage("me", { message: "Server Working Correctly!" });
   });
 
   router.post("/upload", upload.single("file"), async (req, res) => {
