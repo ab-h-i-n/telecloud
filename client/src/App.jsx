@@ -9,14 +9,12 @@ function App() {
 
   return (
     <div className="grid grid-rows-[min-content,1fr] h-screen bg-slate-950">
-    <Header/>
      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/:foldername" element={<FolderFiles/>} />
       </Routes>
      </BrowserRouter>
-     <UploadBtn/>
     </div>
   );
 }
