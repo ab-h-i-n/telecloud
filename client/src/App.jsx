@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import UploadBtn from "./components/UploadBtn";
-import UserFolder from "./pages/UserFolder";
+import FolderFiles from "./pages/FolderFiles"
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/:username" element={<UserFolder/>} />
+        <Route path="/:foldername" element={<FolderFiles/>} />
       </Routes>
      </BrowserRouter>
      <UploadBtn/>

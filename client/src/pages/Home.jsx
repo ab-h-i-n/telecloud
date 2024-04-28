@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Folder from '../components/Folder'
-import getAllUsers from '../api/getAllUsers'
+import getAllFolders from '../api/getAllFolders'
 
 const Home = () => {
-  const [users , setUsers] = useState();
+  const [folders , setFolders] = useState();
   
   useEffect(()=>{
-    const fetchUsers = async () => {
-      const users = await getAllUsers();
-      setUsers(users);
-    }
-    fetchUsers();
+    getAllFolders().then(folders => setFolders(folders))
   },[])
 
   return (
     <div className='p-5 grid grid-cols-3 h-min gap-10'>
-      <Folder key={'user0'} username={'user0'} />
         {
-          users?.map(user => (
-            <Folder key={user.username} username={user.username} />
+          folders?.map(folder => (
+            <Folder key={folder.foldername} foldername={folder.foldername} />
           ))
         }
     </div>

@@ -6,7 +6,7 @@ import uploadFile from '../api/uploadFile'
 
 const Modal = ({isOpen, setOpen}) => {
     const fileRef = useRef();
-    const userNameRef = useRef();
+    const folderNameRef = useRef();
     const fileNameRef = useRef();
     const [isLoading, setLoading] = useState(false);
 
@@ -19,10 +19,10 @@ const Modal = ({isOpen, setOpen}) => {
             e.stopPropagation();
         }} onSubmit={(e)=>{
             e.preventDefault();
-            uploadFile(fileRef.current.files[0], userNameRef.current.value, fileNameRef.current.value , setLoading);
+            uploadFile(fileRef.current.files[0], folderNameRef.current.value, fileNameRef.current.value , setLoading);
         }} className='grid gap-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
 
-            <InputText Ref={userNameRef} placeholder={'Username'} />
+            <InputText Ref={folderNameRef} placeholder={'Foldername'} />
             <InputText Ref={fileNameRef} placeholder={'Filename'} />
             <InputFile fileRef={fileRef} />
             <SubmitBtn text={'Upload'} isLoading={isLoading} />
