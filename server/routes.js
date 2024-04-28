@@ -20,7 +20,7 @@ const Routes = (client, router) => {
 
   router.post("/upload", upload.single("file"), async (req, res) => {
     try {
-      const caption = req.body.username;
+      const caption = req.body.foldername;
       const entity = await client.getEntity("me");
       await client.sendFile(entity, {
         caption,

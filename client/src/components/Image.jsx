@@ -9,7 +9,6 @@ const Image = ({ image }) => {
       image.fileData
     ).toString("base64")}`;
     setImgSrc(imgSrc);
-    console.log(imgSrc);
   }, []);
 
   return (

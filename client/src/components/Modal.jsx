@@ -19,6 +19,11 @@ const Modal = ({isOpen, setOpen}) => {
             e.stopPropagation();
         }} onSubmit={(e)=>{
             e.preventDefault();
+            console.log(
+                fileRef.current.files[0],
+                folderNameRef.current.value,
+                fileNameRef.current.value
+            );
             uploadFile(fileRef.current.files[0], folderNameRef.current.value, fileNameRef.current.value , setLoading);
         }} className='grid gap-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
 
