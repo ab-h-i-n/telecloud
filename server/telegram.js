@@ -4,6 +4,9 @@ const input = require('input');
 const express = require('express');
 const Routes = require('./routes');
 const router = express.Router();
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const apiId = parseInt(process.env.API_ID);
 const apiHash = process.env.API_HASH;
