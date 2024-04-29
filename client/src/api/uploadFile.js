@@ -9,10 +9,11 @@ const uploadFile = async (file,foldername,filename,setLoading) => {
     }
 
     try {
+      const extension = file.name.split('.').pop();
+      const modifiedFile = new File([file], `${filename}.${extension}`);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', modifiedFile);
       formData.append('foldername', foldername);
-      formData.append('filename', filename);
 
       const apiUrl = import.meta.env.VITE_API_URL;
   

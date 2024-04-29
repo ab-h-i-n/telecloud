@@ -16,14 +16,12 @@ const FolderModal = ({isOpen, setOpen , folderName}) => {
 
         <form onClick={(e)=>{
             e.stopPropagation();
-        }} onSubmit={(e)=>{
+        }} onSubmit={ async(e)=>{
             e.preventDefault();
-            console.log(
-                fileRef.current.files[0],
-                folderName,
-                fileNameRef.current.value
-            );
-            uploadFile(fileRef.current.files[0], folderName, fileNameRef.current.value , setLoading);
+            await uploadFile(fileRef.current.files[0], folderName, fileNameRef.current.value , setLoading).then(()=>{
+                setOpen(false);
+                window.location.reload();
+            })
         }} className='grid gap-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
 
             <InputText Ref={fileNameRef} placeholder={'Filename'} />
