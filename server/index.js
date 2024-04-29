@@ -3,6 +3,7 @@ const app = express();
 const { startTelegramClient, router } = require("./telegram");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const deleteFilesAfterOneMinute = require("./clearStorage");
 
 dotenv.config();
 app.use(cors());
@@ -17,5 +18,6 @@ app.listen(PORT, (error) => {
   } else {
     console.log(`Server running at ${PORT}`);
     startTelegramClient();
+    deleteFilesAfterOneMinute();
   }
 });
