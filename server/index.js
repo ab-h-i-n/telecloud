@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const { startTelegramClient, router } = require("./telegram");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 app.use(express.json());
 app.use(router);
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {

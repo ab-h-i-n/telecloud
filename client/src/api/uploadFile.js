@@ -9,10 +9,10 @@ const uploadFile = async (file,foldername,filename,setLoading) => {
     }
 
     try {
-      const modifiedFile = new File([file], `${filename}.jpg`);
       const formData = new FormData();
-      formData.append('file', modifiedFile);
+      formData.append('file', file);
       formData.append('foldername', foldername);
+      formData.append('filename', filename);
 
       const apiUrl = import.meta.env.VITE_API_URL;
   
