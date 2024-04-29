@@ -1,18 +1,18 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const { startTelegramClient, router  } = require('./telegram');
-const cors = require('cors');
-const dotenv = require('dotenv');
+const { startTelegramClient, router } = require("./telegram");
+const dotenv = require("dotenv");
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
 app.use(router);
 
-const PORT = process.env.PORT;
-app.listen(PORT, ()=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, (error) => {
+  if (error) {
+    console.error("Error starting the server:", error.message);
+  } else {
     console.log(`Server running at ${PORT}`);
     startTelegramClient();
-})
-
-
+  }
+});

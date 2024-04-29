@@ -1,7 +1,5 @@
 const { Api } = require("telegram");
 const multer = require("multer");
-const { log } = require("console");
-const { promises } = require("fs");
 
 const storage = multer.diskStorage({
   destination: "images/",
@@ -14,8 +12,13 @@ const upload = multer({ storage: storage });
 
 const Routes = (client, router) => {
   router.get("/", async (req, res) => {
-    res.send("Server Working Correctly!");
-    await client.sendMessage("me", { message: "Server Working Correctly!" });
+    try {
+      res.send("Server Working Correctly!");
+      await client.sendMessage("me", { message: "Server Working Correctly!" });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   });
 
   router.post("/upload", upload.single("file"), async (req, res) => {
@@ -27,7 +30,6 @@ const Routes = (client, router) => {
         file: req.file.path,
         forceDocument: true,
       });
-
       res.json({ message: "File sent" });
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -50,14 +52,13 @@ const Routes = (client, router) => {
         uniqueFolders.add(foldername);
       });
 
-      // Convert Set to array
       const folders = Array.from(uniqueFolders).map((foldername) => ({
         foldername: foldername,
       }));
 
       res.json(folders);
     } catch (error) {
-      console.error("Error downloading media:", error);
+      console.error("Error retrieving folders:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
@@ -88,9 +89,8 @@ const Routes = (client, router) => {
       const files = await Promise.all(filePromise);
 
       res.json(files);
-
     } catch (error) {
-      console.error("Error downloading media:", error);
+      console.error("Error retrieving files:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
