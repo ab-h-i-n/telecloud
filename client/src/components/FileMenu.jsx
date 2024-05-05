@@ -29,7 +29,7 @@ const FileMenu = ({ isMenuOpen, setMenuOpen, file }) => {
         }}
         className={`${
           isMenuOpen ? "translate-y-0" : "translate-y-full"
-        } transition-all absolute w-screen bottom-0 py-10 px-5 bg-slate-800 rounded-t-2xl grid gap-10`}
+        } transition-all absolute w-screen bottom-0 pt-10 py-20 px-5 bg-slate-800 rounded-t-2xl grid gap-10`}
       >
         <div className="bg-slate-950 rounded p-5 flex  gap-5 items-center text-white font-medium">
           <div className="w-28">
