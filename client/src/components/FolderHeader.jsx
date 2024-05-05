@@ -2,17 +2,27 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import FolderMenu from "./FolderMenu";
 import { useDetectClickOutside } from "react-detect-click-outside";
+import deleteFolder from "../api/deleteFolder";
 
 const HeaderWithBack = () => {
   const { foldername } = useParams();
   const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const handleMenuClose = () => {
     if (isMenuOpen) {
       setMenuOpen(false);
     }
   };
+
+  const handleDelete = () => {
+    setLoading(true);
+    deleteFolder(foldername)
+    .then(res => alert(res.message))
+    .then(()=>setLoading(false))
+    .then(()=>navigate(-1))
+  }
 
   const ref = useDetectClickOutside({ onTriggered: handleMenuClose });
 
@@ -36,6 +46,8 @@ const HeaderWithBack = () => {
         <FolderMenu
           className={"absolute top-full right-1/2"}
           isMenuOpen={isMenuOpen}
+          handleDelete={handleDelete}
+          isLoading={isLoading}
         />
       </span>
     </div>

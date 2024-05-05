@@ -39,13 +39,18 @@ const FileMenu = ({ isMenuOpen, setMenuOpen, file }) => {
           <span>{file.fileName}</span>
         </div>
 
-        <div
-          onClick={handleDelete}
-          className="text-white font-medium grid py-3 px-5 rounded place-content-center bg-red-800 "
-        >
-          <span className="text-red-500">
-            {isLoading ? "Deleting..." : "Delete"}
-          </span>
+        <div className="grid gap-3 text-white font-medium  ">
+          <div className=" py-3 px-5 rounded grid place-content-center bg-slate-700">
+            <span>Rename</span>
+          </div>
+          <div
+            onClick={handleDelete}
+            className=" py-3 px-5 rounded bg-red-800 grid place-content-center"
+          >
+            <span className="text-red-500">
+              {isLoading ? "Deleting..." : "Delete"}
+            </span>
+          </div>
         </div>
       </div>
     </div>

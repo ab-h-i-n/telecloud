@@ -111,6 +111,34 @@ const Routes = (client, router) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
+
+
+  router.delete("/deleteFolder/:foldername", async (req, res) => {
+
+    try {
+      const { foldername } = req.params;
+      const entity = await client.getEntity("me");
+
+      const messages = await client.getMessages(entity, {
+        filter: Api.InputMessagesFilterDocument,
+      });
+
+      const folderFiles = messages.filter(
+        (file) => file.message === foldername
+      );
+
+      const fileIds = folderFiles.map((file) => file.id);
+
+      await client.deleteMessages(entity, fileIds, { revoke: false });
+
+      res.json({ message: "Folder deleted" });
+
+    } catch (error) {
+      console.error("Error deleting folder:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+
+  });
 };
 
 module.exports = Routes;
