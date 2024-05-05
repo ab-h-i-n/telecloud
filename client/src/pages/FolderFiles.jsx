@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Image from "../components/Image";
 import getFiles from "../api/getFiles";
-import HeaderWithBack from "../components/HeaderWithBack";
+import FolderHeader from "../components/FolderHeader";
 import Loader from "../components/Loader";
 import UploadBtn from "../components/UploadBtn";
 import FolderModal from "../components/FolderModal";
@@ -12,6 +12,7 @@ const FolderFiles = () => {
   const [files, setFiles] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isOpen, setOpen] = useState(false);
+ 
 
   useEffect(() => {
     getFiles(foldername)
@@ -23,7 +24,7 @@ const FolderFiles = () => {
 
   return (
     <div className="grid grid-rows-[min-content,1fr]">
-      <HeaderWithBack />
+      <FolderHeader />
       {isLoading ? (
         <Loader />
       ) : (
