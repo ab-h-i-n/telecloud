@@ -83,6 +83,7 @@ const Routes = (client, router) => {
           fileName: message.media.document.attributes[1].fileName,
           fileSize: message.media.document.size,
           mimeType: message.media.document.mimeType,
+          fileId: message.id,
         };
       });
 
@@ -91,6 +92,22 @@ const Routes = (client, router) => {
       res.json(files);
     } catch (error) {
       console.error("Error retrieving files:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+
+  router.delete("/deleteFile/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const messageId = parseInt(id);
+
+      const entity = await client.getEntity("me");
+      await client.deleteMessages(entity, [messageId], { revoke: false });
+
+      res.json({ message: "File deleted" });
+
+    } catch (error) {
+      console.error("Error deleting file:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   });

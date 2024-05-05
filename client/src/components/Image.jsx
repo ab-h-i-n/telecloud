@@ -28,6 +28,7 @@ const Image = ({ image }) => {
       <FileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} file={{
         fileName : image.fileName,
         src : imgSrc,
+        id : image.fileId
       }}/>
       <div className="text-white font-medium text-center p-3">{image.fileName}</div>
     </div>
